@@ -1,0 +1,6 @@
+startServices: "s3, lambda, dynamodb, sqs"
+
+# set localstack to be visible in the cluster
+service:
+  type: ClusterIP
+  edgeServicePort: 4566
