@@ -1,0 +1,29 @@
+---
+- name: Preparing Ubuntu for AetherFlow
+  hosts: local
+  become: yes   # run commands with sudo privileges
+
+  tasks:
+    - name: Update cache apt
+      apt:
+        update_cache: yes
+
+    - name: Instalaction of support packages
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+
+    - name: Docker instalation
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Making sure Docker is running
+      service:
+        name: docker
+        state: started
+        enabled: yes   # this makes Docker start automaticlly after restaring system
