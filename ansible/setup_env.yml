@@ -27,3 +27,17 @@
         name: docker
         state: started
         enabled: yes   # this makes Docker start automaticlly after restaring system
+
+    - name: Download and install K3s
+      shell: curl -sfL https://get.k3s.io | sh -
+      args:   # run this command only if the file does not already exists
+        creates: /usr/local/bin/k3s   # if this file already exists do not perform this task again
+
+    - name: Wait for the configuration file to be wolcomed
+      wait_for:
+        path: /etc/rancher/k3s/k3s.yaml
+
+    - name: Change the permission on the config file
+      file:
+        path: /etc/rancher/k3s/k3s.yaml
+        mode: '0644'
