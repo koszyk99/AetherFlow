@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "1.7.0",
-  "serial": 54,
+  "serial": 34,
   "lineage": "ec10a4c2-d0b0-070c-3b03-9d349a637449",
   "outputs": {},
   "resources": [
@@ -160,6 +160,68 @@
           },
           "sensitive_attributes": [],
           "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjozNjAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lambda_function",
+      "name": "processor_lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "status": "tainted",
+          "schema_version": 0,
+          "attributes": {
+            "architectures": null,
+            "arn": null,
+            "code_sha256": null,
+            "code_signing_config_arn": null,
+            "dead_letter_config": [],
+            "description": null,
+            "environment": [],
+            "ephemeral_storage": null,
+            "file_system_config": [],
+            "filename": "lambda_function.zip",
+            "function_name": "AetherFlow_Processor",
+            "handler": "processor.lambda_handler",
+            "id": "AetherFlow_Processor",
+            "image_config": [],
+            "image_uri": null,
+            "invoke_arn": null,
+            "kms_key_arn": null,
+            "last_modified": null,
+            "layers": null,
+            "logging_config": null,
+            "memory_size": 128,
+            "package_type": "Zip",
+            "publish": false,
+            "qualified_arn": null,
+            "qualified_invoke_arn": null,
+            "replace_security_groups_on_destroy": null,
+            "replacement_security_group_ids": null,
+            "reserved_concurrent_executions": -1,
+            "role": "arn:aws:iam::000000000000:role/lambda-role",
+            "runtime": "python3.12",
+            "s3_bucket": null,
+            "s3_key": null,
+            "s3_object_version": null,
+            "signing_job_arn": null,
+            "signing_profile_version_arn": null,
+            "skip_destroy": false,
+            "snap_start": [],
+            "source_code_hash": null,
+            "source_code_size": null,
+            "tags": null,
+            "tags_all": null,
+            "timeout": 3,
+            "timeouts": null,
+            "tracing_config": null,
+            "version": null,
+            "vpc_config": []
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19"
         }
       ]
     },

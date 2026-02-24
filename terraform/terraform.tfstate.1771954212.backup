@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "1.7.0",
-  "serial": 54,
+  "serial": 25,
   "lineage": "ec10a4c2-d0b0-070c-3b03-9d349a637449",
   "outputs": {},
   "resources": [
@@ -81,7 +81,7 @@
             "stream_label": "",
             "stream_view_type": "",
             "table_class": "STANDARD",
-            "tags": null,
+            "tags": {},
             "tags_all": {},
             "timeouts": null,
             "ttl": [
@@ -165,6 +165,84 @@
     },
     {
       "mode": "managed",
+      "type": "aws_lambda_function",
+      "name": "processor_lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "architectures": [
+              "x86_64"
+            ],
+            "arn": "arn:aws:lambda:us-east-1:000000000000:function:AetherFlow_Processor",
+            "code_sha256": "kC/zbLLQJ/HOWvdgpbchSHsjm/PkQ98YCb+JiGn2X6k=",
+            "code_signing_config_arn": "",
+            "dead_letter_config": [],
+            "description": "",
+            "environment": [],
+            "ephemeral_storage": [
+              {
+                "size": 512
+              }
+            ],
+            "file_system_config": [],
+            "filename": null,
+            "function_name": "AetherFlow_Processor",
+            "handler": "processor.lambda_handler",
+            "id": "AetherFlow_Processor",
+            "image_config": [],
+            "image_uri": "",
+            "invoke_arn": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:000000000000:function:AetherFlow_Processor/invocations",
+            "kms_key_arn": "",
+            "last_modified": "2026-02-24T17:21:59.481884+0000",
+            "layers": [],
+            "logging_config": [
+              {
+                "application_log_level": "",
+                "log_format": "Text",
+                "log_group": "/aws/lambda/AetherFlow_Processor",
+                "system_log_level": ""
+              }
+            ],
+            "memory_size": 128,
+            "package_type": "Zip",
+            "publish": null,
+            "qualified_arn": "arn:aws:lambda:us-east-1:000000000000:function:AetherFlow_Processor:$LATEST",
+            "qualified_invoke_arn": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:000000000000:function:AetherFlow_Processor:$LATEST/invocations",
+            "replace_security_groups_on_destroy": null,
+            "replacement_security_group_ids": null,
+            "reserved_concurrent_executions": -1,
+            "role": "arn:aws:iam::000000000000:role/lambda-role",
+            "runtime": "python3.12",
+            "s3_bucket": null,
+            "s3_key": null,
+            "s3_object_version": null,
+            "signing_job_arn": "",
+            "signing_profile_version_arn": "",
+            "skip_destroy": false,
+            "snap_start": [],
+            "source_code_hash": "",
+            "source_code_size": 611,
+            "tags": {},
+            "tags_all": {},
+            "timeout": 3,
+            "timeouts": null,
+            "tracing_config": [
+              {
+                "mode": "PassThrough"
+              }
+            ],
+            "version": "$LATEST",
+            "vpc_config": []
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMCJ9"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
       "type": "aws_s3_bucket",
       "name": "transaction_bucket",
       "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
@@ -216,7 +294,7 @@
                 ]
               }
             ],
-            "tags": null,
+            "tags": {},
             "tags_all": {},
             "timeouts": null,
             "versioning": [

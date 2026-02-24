@@ -16,3 +16,19 @@ attribute {
     type = "S"   # mean string
     }
 }
+
+# this block automatically creates a ZIP file from code
+data "archive_file" "lambda_zip" {
+    type            = "zip"
+    source_file     = "processor.py"
+    output_path     = "lambda_function.zip"
+}
+
+# this block creates a Lambda in LocalStack
+resource "aws_lambda_function" "processor_lambda" {
+    filename        = "lambda_function.zip"
+    function_name   = "AetherFlow_Processor_Final"
+    role            = "arn:aws:iam::000000000000:role/lambda-role"
+    handler         = "processor.lambda_handler"
+    runtime         = "python3.10"
+}
