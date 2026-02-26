@@ -32,3 +32,23 @@ resource "aws_lambda_function" "processor_lambda" {
     handler         = "processor.lambda_handler"
     runtime         = "python3.10"
 }
+
+# permission for s3 to call lambda
+resource "aws_lambda_permission" "allow_bucket" {
+    statement_id = "AllowExecutionFromS3Bucket"
+    action = "lambda:InvokeFunction"
+    function_name = aws_lambda_function.processor_lambda.arn
+    principal = "s3.amazonaws.com"
+    source_arn = aws_s3_bucket.transaction_bucket.arn
+}
+
+# bucket notification configuration
+resource "aws_s3_bucket_notification" "bucket_notification" {
+    bucket = aws_s3_bucket.transaction_bucket.id
+
+        lambda_function {
+            lambda_function_arn     = aws_lambda_function.processor_lambda.arn
+            events                  = ["s3:ObjectCreated:*"]
+        }
+        depends_on = [aws_lambda_permission.allow_bucket]
+}
