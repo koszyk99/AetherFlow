@@ -3,7 +3,8 @@ import boto3
 import os
 
 # connect to DynamoDB
-def handler(event, context):
+def lambda_handler(event, context):
+    print("Event received from S3")
     dynamodb = boto3.resource('dynamodb', endpoint_url=os.environ.get('LOCALSTACK_ENDPOINT'))
     table = dynamodb.Table('AetherFlow_Transaction')
 

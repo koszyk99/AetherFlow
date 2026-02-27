@@ -30,7 +30,7 @@ resource "aws_lambda_function" "processor_lambda" {
     function_name   = "AetherFlow_Processor_Final"
     role            = "arn:aws:iam::000000000000:role/lambda-role"
     handler         = "processor.lambda_handler"
-    runtime         = "python3.10"
+    runtime         = "python3.9"
 }
 
 # permission for s3 to call lambda

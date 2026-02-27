@@ -1,0 +1,7 @@
+{
+    "transaction_id": "TX_999",
+    "amount": 15000,
+    "currency": "PLN",
+    "user_id": "user_01",
+    "location": "Warszawa"
+}
