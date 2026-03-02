@@ -31,15 +31,16 @@ resource "aws_lambda_function" "processor_lambda" {
     role            = "arn:aws:iam::000000000000:role/lambda-role"
     handler         = "processor.lambda_handler"
     runtime         = "python3.9"
+    timeout         = 30
 }
 
 # permission for s3 to call lambda
 resource "aws_lambda_permission" "allow_bucket" {
-    statement_id = "AllowExecutionFromS3Bucket"
-    action = "lambda:InvokeFunction"
-    function_name = aws_lambda_function.processor_lambda.arn
-    principal = "s3.amazonaws.com"
-    source_arn = aws_s3_bucket.transaction_bucket.arn
+    statement_id    = "AllowExecutionFromS3Bucket"
+    action          = "lambda:InvokeFunction"
+    function_name   = aws_lambda_function.processor_lambda.function_name
+    principal       = "s3.amazonaws.com"
+    source_arn      = aws_s3_bucket.transaction_bucket.arn
 }
 
 # bucket notification configuration
