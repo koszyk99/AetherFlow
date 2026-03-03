@@ -53,3 +53,15 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
         }
         depends_on = [aws_lambda_permission.allow_bucket]
 }
+
+# create notification topic
+resource "aws_sns_topic" "fraud_alerts" {
+    name = "fraud-alerts-topic"
+}
+
+# subsription
+resource "aws_sns_topic_subscription" "email_target" {
+    topic_arn   = aws_sns_topic.fraud_alerts.arn
+    protocol    = "email"
+    endpoint    = "admin@aetherflow.com"
+}

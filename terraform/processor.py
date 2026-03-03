@@ -25,34 +25,43 @@ def lambda_handler(event, context):
 
     table = dynamodb.Table('FraudSentinel_Result')
 
+    # download ARN topic from Terraform
+    topic_arn = "arn:aws:sns:us-east-1:000000000000:fraud-alerts-topic"
+
     # process data from a file that has been uploaded to S3
     for record in event['Records']:
         bucket  = record['s3']['bucket']['name']
         key     = record['s3']['object']['key']
 
-        # download file from S3
-        response     = s3_client.get_object(Bucket=bucket, Key=key)
-        file_content = response['Body'].read().decode('utf-8')
-
-        # paese JSON
+        # downloading
         try:
+            response = s3_client.get_object(Bucket=bucket, Key=key)
+            file_content = response['Body'].read().decode('utf-8')
+
             data = json.loads(file_content)
             amount = data.get('amount', 0)
-
-            # "Fraud Detection" logic
             status = 'FLAGGED' if amount > 1000 else 'APPROVED'
-            print(f"Transaction {key}: Amount {amount} -> Status {status}")
+
+            # recording to the dynamodb
+            table.put_item(Item={
+                'transaction_id': key,
+                'amount': amount,
+                'status': status,
+                'source': bucket
+            })
+
+            # SNS alert (only if FLAGGED)
+            if status == 'FLAGGED':
+                sns_client.publish(
+                    TopicArn=topic_arn,
+                    Subject="Alert: High Value Transaction Detected",
+                    Message=f"Warning! Transaction {key} from {bucket} has a high amount: {amount}. Status: {status}"
+                )
+                print(f"Alert sent for {key}")
 
         except Exceptation as e:
             print(f"Error parsing {key}: {str(e)}")
             status = 'ERROR'
 
-        # save data to dynamodb
-        table.put_item(Item={
-            'transaction_id': key,
-            'amount': amount,
-            'status': status,
-            'source': bucket
-        })
 
     return {'StatusCode': 200}
