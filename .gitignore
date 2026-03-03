@@ -1,4 +1,5 @@
+*.zip
+*.json
 .terraform/
-*.tfstate
-*.log
-ansible/*.retry
+terraform.tfstate*
+.terraform.lock.hcl
