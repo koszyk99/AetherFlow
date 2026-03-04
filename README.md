@@ -47,7 +47,15 @@ The system utilizes a modern serverless stack:
 +----+---------------+-------------+------------------+
 =================================================================
 
-![AetherFlow Architecture](architecture.png)
+
+
+
+
+<img width="1408" height="768" alt="architecture" src="https://github.com/user-attachments/assets/5a7424cb-629f-43f4-b09a-ca746d9d2f66" />
+
+
+
+
 
 
 
