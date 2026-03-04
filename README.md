@@ -48,12 +48,6 @@ The system utilizes a modern serverless stack:
 =================================================================
 
 
-<img width="1408" height="768" alt="Gemini_Generated_Image_9mii3r9mii3r9mii" src="https://github.com/user-attachments/assets/5b2a1994-e08e-48af-81cf-b5f0380ea567" />
-
-
-
-
-
 
 
 
