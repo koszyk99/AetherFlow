@@ -39,3 +39,43 @@ In a new terminal window (keep the tunnel running!) deploy the cloud resources:
 cd terraform
 terraform init
 terraform apply -auto-approve
+
+4. Run the Live Dashboard
+Navigate to the root directory, activate your virtual environment, and launch the monitoring tool:
+
+Bash
+
+source venv/bin/activate
+pip install pandas tabulate boto3
+python3 dashboard.py
+
+📊 Live Monitoring Preview
+When the system is operational, the dashboard provides real-time statistics directly from DynamoDB:
+
+Plaintext
+
+=================================================================
+                AETHERFLOW - LIVE MONITORING
+=================================================================
+ STATUS: OPERATIONAL | Transactions: 3 | SNS Alerts: 2
+ Total Blocked Amount: 17500.00 USD
+-----------------------------------------------------------------
++----+---------------+-------------+------------------+
+|    | S3 Object Key | Amount (USD)| Detection Status |
++====+===============+=============+==================+
+|  0 | tx_ok.json    |         150 | APPROVED         |
+|  1 | tx_alert.json |       12000 | FLAGGED          |
+|  2 | tx_fraud.json |        5500 | FLAGGED          |
++----+---------------+-------------+------------------+
+=================================================================
+
+🧹 Cleanup
+To stop the services and remove the infrastructure from LocalStack (remember to empty the bucket first):
+
+Bash
+
+# Empty bucket to avoid BucketNotEmpty error
+aws --endpoint-url=http://localhost:4566 s3 rm s3://aetherflow-transactions --recursive
+
+# Destroy infrastructure
+terraform destroy -auto-approve
