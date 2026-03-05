@@ -1,6 +1,6 @@
 # 🌊 AetherFlow: Serverless Fraud Detection System
 
-A cloud-native, event-driven data pipeline built with **Terraform**, **LocalStack**, and **Python**. This system automatically detects high-value transactions and triggers security alerts in real-time.
+AetherFlow is a high-performance, **event-driven data pipeline** designed for real-time financial monitoring. It automates everything: from provisioning the underlying Ubuntu host and Kubernetes cluster to deploying a serverless AWS-compatible stack.
 
 ---
 
@@ -33,7 +33,7 @@ sudo kubectl port-forward svc/localstack 4566:4566 -n default
 ```
 Keep this terminal window open during the entire session.
 
-3. Initialize Infrastructure
+### 3. Initialize Infrastructure
 In a new terminal window, deploy the cloud resources:
 
 ```bash
@@ -42,7 +42,7 @@ terraform init
 terraform apply -auto-approve
 ```
 
-4. Run the Live Dashboard
+### 4. Run the Live Dashboard
 Navigate to the root directory and launch the monitoring tool:
 ```bash
 source venv/bin/activate
@@ -66,7 +66,7 @@ When the system is operational, the dashboard provides real-time statistics dire
 
 ---
 
-🧹 Cleanup
+### 🧹 Cleanup
 To avoid resource leaks, clean the S3 bucket before destroying the stack:
 ```bash
 # Empty the bucket
