@@ -29,29 +29,29 @@ The system utilizes a modern serverless stack running on a **Kubernetes** cluste
 ### 2. Establish Connection (The Tunnel)
 Since LocalStack is running inside K8s, you **must** expose the service to your localhost:
 ```bash
-kubectl port-forward svc/localstack 4566:4566
+sudo kubectl port-forward svc/localstack 4566:4566 -n default
+```
 Keep this terminal window open during the entire session.
 
 3. Initialize Infrastructure
 In a new terminal window, deploy the cloud resources:
 
-Bash
-
+```bash
 cd terraform
 terraform init
 terraform apply -auto-approve
+```
+
 4. Run the Live Dashboard
 Navigate to the root directory and launch the monitoring tool:
-
-Bash
-
+```bash
 source venv/bin/activate
 pip install pandas tabulate boto3
 python3 dashboard.py
+```
+
 📊 Live Monitoring Preview
 When the system is operational, the dashboard provides real-time statistics:
-
-Plaintext
 
 =================================================================
                 AETHERFLOW - LIVE MONITORING
@@ -67,13 +67,17 @@ Plaintext
 |  2 | tx_fraud.json |        5500 | FLAGGED          |
 +----+---------------+-------------+------------------+
 =================================================================
+
+---
+
 🧹 Cleanup
 Note: S3 buckets must be empty before destruction.
-
-Bash
-
+```bash
 # Empty the bucket
 aws --endpoint-url=http://localhost:4566 s3 rm s3://aetherflow-transactions --recursive
+```
 
+```bash
 # Destroy infrastructure
 terraform destroy -auto-approve
+```
