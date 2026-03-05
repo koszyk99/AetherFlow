@@ -30,11 +30,10 @@ The system utilizes a modern serverless stack running on a **Kubernetes** cluste
 Since LocalStack is running inside K8s, you **must** expose the service to your localhost:
 ```bash
 kubectl port-forward svc/localstack 4566:4566
-
-*Keep this terminal window open during the entire session.*
+Keep this terminal window open during the entire session.
 
 3. Initialize Infrastructure
-In a new terminal window (keep the tunnel running!) deploy the cloud resources:
+In a new terminal window, deploy the cloud resources:
 
 Bash
 
@@ -42,7 +41,7 @@ cd terraform
 terraform init
 terraform apply -auto-approve
 4. Run the Live Dashboard
-Navigate to the root directory, activate your virtual environment, and launch the monitoring tool:
+Navigate to the root directory and launch the monitoring tool:
 
 Bash
 
@@ -50,7 +49,7 @@ source venv/bin/activate
 pip install pandas tabulate boto3
 python3 dashboard.py
 📊 Live Monitoring Preview
-When the system is operational, the dashboard provides real-time statistics directly from DynamoDB:
+When the system is operational, the dashboard provides real-time statistics:
 
 Plaintext
 
@@ -69,11 +68,11 @@ Plaintext
 +----+---------------+-------------+------------------+
 =================================================================
 🧹 Cleanup
-To stop the services and remove the infrastructure from LocalStack (remember to empty the bucket first):
+Note: S3 buckets must be empty before destruction.
 
 Bash
 
-# Empty bucket to avoid BucketNotEmpty error
+# Empty the bucket
 aws --endpoint-url=http://localhost:4566 s3 rm s3://aetherflow-transactions --recursive
 
 # Destroy infrastructure
