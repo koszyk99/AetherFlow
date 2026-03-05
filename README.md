@@ -31,48 +31,11 @@ Since LocalStack is running inside K8s, you **must** expose the service to your 
 ```bash
 kubectl port-forward svc/localstack 4566:4566
 
-Keep this terminal window open during the entire session.
-3. Initialize Infrastructure
+*Keep this terminal window open during the entire session.*
 
-In a new terminal window:
-Bash
-
+### 3. Initialize Infrastructure
+In a new terminal window (keep the tunnel running!) deploy the cloud resources:
+```bash
 cd terraform
 terraform init
 terraform apply -auto-approve
-
-4. Run the Live Dashboard
-
-Navigate to the root directory and run:
-Bash
-
-source venv/bin/activate
-pip install pandas tabulate boto3
-python3 dashboard.py
-
-📊 Live Monitoring Preview
-
-When the system is operational, the dashboard provides real-time statistics:
-Plaintext
-
-=================================================================
-                AETHERFLOW - LIVE MONITORING
-=================================================================
- STATUS: OPERATIONAL | Transactions: 3 | SNS Alerts: 2
- Total Blocked Amount: 17500.00 USD
------------------------------------------------------------------
-+----+---------------+-------------+------------------+
-|    | S3 Object Key | Amount (USD)| Detection Status |
-+====+===============+=============+==================+
-|  0 | tx_ok.json    |         150 | APPROVED         |
-|  1 | tx_alert.json |       12000 | FLAGGED          |
-|  2 | tx_fraud.json |        5500 | FLAGGED          |
-+----+---------------+-------------+------------------+
-=================================================================
-
-🧹 Cleanup
-
-To remove the infrastructure from LocalStack:
-Bash
-
-terraform destroy -auto-approve
