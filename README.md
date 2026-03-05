@@ -2,7 +2,6 @@
 
 AetherFlow is a high-performance, **event-driven data pipeline** designed for real-time financial monitoring. It automates everything: from provisioning the underlying Ubuntu host and Kubernetes cluster to deploying a serverless AWS-compatible stack.
 
----
 
 ## 🏗 Architecture
 The system utilizes a modern serverless stack running on a **Kubernetes** cluster via **LocalStack**:
@@ -17,7 +16,6 @@ The system utilizes a modern serverless stack running on a **Kubernetes** cluste
 4. **Storage:** All results are archived in an **AWS DynamoDB** table for audit.
 5. **Monitoring:** A custom **Python Dashboard** provides a live view of the pipeline.
 
----
 
 ## 🛠 Setup & Deployment
 
@@ -50,8 +48,6 @@ pip install pandas tabulate boto3
 python3 dashboard.py
 ```
 
----
-
 ## 📊 Live Monitoring Preview
 When the system is operational, the dashboard provides real-time statistics directly from DynamoDB:
 
@@ -64,7 +60,6 @@ When the system is operational, the dashboard provides real-time statistics dire
 **Current Status:** `OPERATIONAL` | **Transactions:** 3 | **SNS Alerts:** 2  
 **Total Blocked Amount:** 17500.00 USD
 
----
 
 ### 🧹 Cleanup
 To avoid resource leaks, clean the S3 bucket before destroying the stack:
