@@ -49,7 +49,6 @@ source venv/bin/activate
 pip install pandas tabulate boto3
 python3 dashboard.py
 ```
----
 
 ---
 
@@ -67,10 +66,8 @@ When the system is operational, the dashboard provides real-time statistics dire
 
 ---
 
----
-
 🧹 Cleanup
-Note: S3 buckets must be empty before destruction.
+To avoid resource leaks, clean the S3 bucket before destroying the stack:
 ```bash
 # Empty the bucket
 aws --endpoint-url=http://localhost:4566 s3 rm s3://aetherflow-transactions --recursive
