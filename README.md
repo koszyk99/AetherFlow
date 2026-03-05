@@ -33,13 +33,14 @@ kubectl port-forward svc/localstack 4566:4566
 
 *Keep this terminal window open during the entire session.*
 
-### 3. Initialize Infrastructure
+3. Initialize Infrastructure
 In a new terminal window (keep the tunnel running!) deploy the cloud resources:
-```bash
+
+Bash
+
 cd terraform
 terraform init
 terraform apply -auto-approve
-
 4. Run the Live Dashboard
 Navigate to the root directory, activate your virtual environment, and launch the monitoring tool:
 
@@ -48,7 +49,6 @@ Bash
 source venv/bin/activate
 pip install pandas tabulate boto3
 python3 dashboard.py
-
 📊 Live Monitoring Preview
 When the system is operational, the dashboard provides real-time statistics directly from DynamoDB:
 
@@ -68,7 +68,6 @@ Plaintext
 |  2 | tx_fraud.json |        5500 | FLAGGED          |
 +----+---------------+-------------+------------------+
 =================================================================
-
 🧹 Cleanup
 To stop the services and remove the infrastructure from LocalStack (remember to empty the bucket first):
 
