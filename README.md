@@ -54,6 +54,7 @@ python3 dashboard.py
 When the system is operational, the dashboard provides real-time statistics:
 
 Plaintext
+
 =================================================================
                 AETHERFLOW - LIVE MONITORING
 =================================================================
