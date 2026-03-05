@@ -51,25 +51,21 @@ python3 dashboard.py
 ```
 ---
 
+---
+
 ## 📊 Live Monitoring Preview
-When the system is operational, the dashboard provides real-time statistics:
+When the system is operational, the dashboard provides real-time statistics directly from DynamoDB:
 
-Plaintext
+| ID | S3 Object Key | Amount (USD) | Detection Status |
+|----|---------------|--------------|------------------|
+| 0  | tx_ok.json    | 150          | APPROVED         |
+| 1  | tx_alert.json | 12000        | FLAGGED          |
+| 2  | tx_fraud.json | 5500         | FLAGGED          |
 
-=================================================================
-                AETHERFLOW - LIVE MONITORING
-=================================================================
- STATUS: OPERATIONAL | Transactions: 3 | SNS Alerts: 2
- Total Blocked Amount: 17500.00 USD
------------------------------------------------------------------
-+----+---------------+-------------+------------------+
-|    | S3 Object Key | Amount (USD)| Detection Status |
-+====+===============+=============+==================+
-|  0 | tx_ok.json    |         150 | APPROVED         |
-|  1 | tx_alert.json |       12000 | FLAGGED          |
-|  2 | tx_fraud.json |        5500 | FLAGGED          |
-+----+---------------+-------------+------------------+
-=================================================================
+**Current Status:** `OPERATIONAL` | **Transactions:** 3 | **SNS Alerts:** 2  
+**Total Blocked Amount:** 17500.00 USD
+
+---
 
 ---
 
