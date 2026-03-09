@@ -7,7 +7,7 @@
 
 AetherFlow is a high-performance, **event-driven data pipeline** designed for real-time financial monitoring. This project demonstrates a complete DevOps lifecycle: from raw OS provisioning to a fully functional serverless cloud architecture.
 
----
+![AetherFlow Architecture]()
 
 ## 🏗 System Architecture & Design
 
@@ -29,10 +29,12 @@ The deployment begins with **Ansible**, which provisions the base Ubuntu host wi
 
 ## 🛠 Setup & Deployment
 
-### 1. Prerequisites
-* LocalStack running in your Kubernetes cluster.
-* Terraform and Python 3.x installed.
-* AWS CLI (configured for LocalStack).
+### 1. Provision the Host Environment (Ansible)
+Prepare your Ubuntu machine with K3s, Docker, and Helm by running the automated playbook:
+```bash
+ansible-playbook setup_ubuntu.yml --ask-become-pass
+```
+This ensures all system dependencies and Kubernetes nodes are correctly initialized.
 
 ### 2. Establish Connection (The Tunnel)
 Since LocalStack is running inside K8s, you **must** expose the service to your localhost:
@@ -43,7 +45,6 @@ Keep this terminal window open during the entire session.
 
 ### 3. Initialize Infrastructure
 In a new terminal window, deploy the cloud resources:
-
 ```bash
 cd terraform
 terraform init
