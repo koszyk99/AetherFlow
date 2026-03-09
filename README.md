@@ -1,20 +1,30 @@
 # 🌊 AetherFlow: Serverless Fraud Detection System
 
-AetherFlow is a high-performance, **event-driven data pipeline** designed for real-time financial monitoring. It automates everything: from provisioning the underlying Ubuntu host and Kubernetes cluster to deploying a serverless AWS-compatible stack.
+[![Ansible](https://img.shields.io/badge/Ansible-%23EE0000.svg?style=for-the-badge&logo=ansible&logoColor=white)](https://www.ansible.com/)
+[![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![K3s](https://img.shields.io/badge/K3s-%23FFC107.svg?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
+[![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://www.python.org/)
+
+AetherFlow is a high-performance, **event-driven data pipeline** designed for real-time financial monitoring. This project demonstrates a complete DevOps lifecycle: from raw OS provisioning to a fully functional serverless cloud architecture.
+
+---
+
+## 🏗 System Architecture & Design
+
+The system follows a multi-layered automation strategy, ensuring that the entire environment is reproducible and scalable.
 
 
-## 🏗 Architecture
-The system utilizes a modern serverless stack running on a **Kubernetes** cluster via **LocalStack**:
 
-![AetherFlow Architecture](https://github.com/koszyk99/AetherFlow/blob/main/architecture.png?raw=true)
+### 🛰️ End-to-End Automation & Data Flow
+The deployment begins with **Ansible**, which provisions the base Ubuntu host with **Docker**, **K3s (Kubernetes)**, and **Helm**. Once the platform is stable, **Terraform** initializes the serverless AWS-compatible resources within **LocalStack** (running as a K8s pod).
 
-1. **Ingest:** JSON transaction files are uploaded to an **AWS S3** bucket.
-2. **Compute:** An S3 Event triggers the **AetherFlow Processor** (AWS Lambda).
-3. **Logic:** The Lambda evaluates the transaction amount:
-    * **Amount < 1000:** Marked as `APPROVED`.
-    * **Amount >= 1000:** Marked as `FLAGGED` and published to an **AWS SNS** Topic.
-4. **Storage:** All results are archived in an **AWS DynamoDB** table for audit.
-5. **Monitoring:** A custom **Python Dashboard** provides a live view of the pipeline.
+**The real-time data flow works as follows:**
+1.  **Ingestion:** A transaction JSON file is uploaded to the **S3 Bucket**.
+2.  **Processing:** An asynchronous S3 Event triggers the **Python 3.9 Lambda** processor.
+3.  **Logic:** The Lambda performs validation:
+    * ✅ **Amount < 1000 USD:** Approved and stored in **DynamoDB**.
+    * 🚩 **Amount ≥ 1000 USD:** Flagged as suspicious, stored in **DynamoDB**, and published to an **SNS Topic**.
+4.  **Observability:** A dedicated **Python Dashboard** continuously polls DynamoDB for live metrics and alerts.
 
 
 ## 🛠 Setup & Deployment
