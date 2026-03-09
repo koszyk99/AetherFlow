@@ -7,7 +7,7 @@
 
 AetherFlow is a high-performance, **event-driven data pipeline** designed for real-time financial monitoring. This project demonstrates a complete DevOps lifecycle: from raw OS provisioning to a fully functional serverless cloud architecture.
 
-![AetherFlow Architecture]()
+![AetherFlow Architecture](AetherFlowArchitecture.png)
 
 ## 🏗 System Architecture & Design
 
