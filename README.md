@@ -1,4 +1,4 @@
-# 🌊 AetherFlow: Serverless Fraud Detection System
+# AetherFlow: Serverless Fraud Detection System
 
 [![Ansible](https://img.shields.io/badge/Ansible-%23EE0000.svg?style=for-the-badge&logo=ansible&logoColor=white)](https://www.ansible.com/)
 [![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
@@ -9,25 +9,25 @@ AetherFlow is a high-performance, **event-driven data pipeline** designed for re
 
 ![AetherFlow Architecture](AetherFlowArchitecture.png)
 
-## 🏗 System Architecture & Design
+## System Architecture & Design
 
 The system follows a multi-layered automation strategy, ensuring that the entire environment is reproducible and scalable.
 
 
 
-### 🛰️ End-to-End Automation & Data Flow
+### End-to-End Automation & Data Flow
 The deployment begins with **Ansible**, which provisions the base Ubuntu host with **Docker**, **K3s (Kubernetes)**, and **Helm**. Once the platform is stable, **Terraform** initializes the serverless AWS-compatible resources within **LocalStack** (running as a K8s pod).
 
 **The real-time data flow works as follows:**
 1.  **Ingestion:** A transaction JSON file is uploaded to the **S3 Bucket**.
 2.  **Processing:** An asynchronous S3 Event triggers the **Python 3.9 Lambda** processor.
 3.  **Logic:** The Lambda performs validation:
-    * ✅ **Amount < 1000 USD:** Approved and stored in **DynamoDB**.
-    * 🚩 **Amount ≥ 1000 USD:** Flagged as suspicious, stored in **DynamoDB**, and published to an **SNS Topic**.
+    * **Amount < 1000 USD:** Approved and stored in **DynamoDB**.
+    * **Amount ≥ 1000 USD:** Flagged as suspicious, stored in **DynamoDB**, and published to an **SNS Topic**.
 4.  **Observability:** A dedicated **Python Dashboard** continuously polls DynamoDB for live metrics and alerts.
 
 
-## 🛠 Setup & Deployment
+## Setup & Deployment
 
 ### 1. Provision the Host Environment (Ansible)
 Prepare your Ubuntu machine with K3s, Docker, and Helm by running the automated playbook:
@@ -59,7 +59,7 @@ pip install pandas tabulate boto3
 python3 dashboard.py
 ```
 
-## 📊 Live Monitoring Preview
+## Live Monitoring Preview
 When the system is operational, the dashboard provides real-time statistics directly from DynamoDB:
 
 | ID | S3 Object Key | Amount (USD) | Detection Status |
@@ -72,7 +72,7 @@ When the system is operational, the dashboard provides real-time statistics dire
 **Total Blocked Amount:** 17500.00 USD
 
 
-### 🧹 Cleanup
+### Cleanup
 To avoid resource leaks, clean the S3 bucket before destroying the stack:
 ```bash
 # Empty the bucket
